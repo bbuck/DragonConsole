@@ -1,0 +1,39 @@
+&00&C--- ANSI Support --&00
+
+&X-Dragon&x-Console&00 3.0 is compatible with ANSI Color Codes. The &X-Dragon&x-Console&00 class
+has two methods that will allow you to convert between &X-Dragon&x-Console&00 Color Codes
+(DCCC) and ANSI Color Codes if you so choose.
+
+&G-FYI:&00 To make an ANSI Color Code you begin with the ESCAPE character ANSI looks
+for which is "&C-\033&00" or you could use &R-com.eleet.dragonconsole.util.ANSI.&l-ESCAPE&00.
+
+&G-convertToANSIColors(&l-String&G-)&00 - Converts any DCCCs in the given String to their
+valid ANSI counterpart, if no valid counterpart for that color can be found then
+it is replaced with "&C-[39;49m&00" which sets the foreground and background to
+their defaults.
+
+&G-convertToDCColors(&l-String&G-)&00 - Converts any ANSI codes in the given String to their
+DCCC counterparts, if no DCCC counterpart can be found then the default color
+code set in the &X-Dragon&x-Console&00 class will be used.
+
+&R-- How to Enable and use ANSI Color Codes.&00
+
+ANSI Color Code usage must be enabled in order for the console to process ANSI
+codes and apply them. Enabling ANSI Codes can be done with the
+&R-setUseANSIColorCodes(&l-boolean&R-)&00 method of the &X-Dragon&x-Console&00 class.
+
+Once ANSI Codes have been enabled then the console will process and use ANSI
+codes in the Strings sent to &R-append(&l-String&R-)&00.
+
+&R-- What about Other ANSI Codes?&00
+
+I plan to continue building upon the ANSI support, as well as the proprietary
+&X-Dragon&x-Console&00 scripts and commands to make &X-Dragon&x-Console&00 a useful and easy
+to implement Terminal Emulator.
+
+&r-** IF ANSI CODES ARE ENABLED DCCC CODES WILL NOT BE APPLIED TO TEXT **
+
+*** ANSI Codes and DCCCs will ALWAYS be processed out of any String sent to
+&R-append(&l-String&R-)&r- regardless if they are enabled or not. This is important to note
+because even if ANSI Codes are enabled you must pass "&&&&" to get "&&" as well as
+"%%%%" to get "%%" ***&00

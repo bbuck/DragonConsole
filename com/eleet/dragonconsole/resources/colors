@@ -1,0 +1,70 @@
+&00&C-- &r-C &y-O &l-L &m-O &r-R &y-S &c-for the &C-Programmer &C--
+&X-Dragon&00Console &00supports color output, and to create the rich output is extremely
+simple! When you &R-append &00a String to the console it will process the String for
+any color codes and add the String to the document with the proper styles for
+each section.
+
+Let's color a prompt! We'll use &C-"&00prompt@example> &C-" &00and without color you see:
+
+&00prompt@example>
+
+&00Which can be kind of boring, but with color we can change that. We'll use the
+new prompt with color codes &C-"&00&&rbprompt&&lb@&&Gbexample&&cb> &C-" &00to get:
+
+&r-prompt&l-@&G-example&C->
+
+&00Which is now much easier to denote each separate portion and it pops off the
+screen. Are the colors required, of course not, but they make everything look
+better if used appropriately.
+
+So, how exactly do you create a proper color code? Well lets see, a color code
+consists of a color code character, a foreground character, and background
+character.
+
+  &C-&&FB
+
+&00The "&C-&&&00" is the default color code character (can be changed with
+&R-setColorCodeChar(&l-char&R-)&00) the "&C-F&00" is the Foreground color character
+and the "&C-B&00" is the Background color character. By default there are a
+number of colors added to the console and you can add anymore that you want
+with &R-addTextColor(&l-char&R-, &l-Color&R-)&00.
+
+Colors that are built in:
+&C-Color Name      Character       Example
+&c---------------------------------------------
+&00Red                 r           &r-Red&00
+Dark Red            R           &R-Dark Red&00
+Blue                l           &l-Blue&00
+Dark Blue           L           &L-Dark Blue&00
+Cyan                c           &c-Cyan&00
+Dark Cyan           C           &C-Dark Cyan&00
+Green               g           &g-Green&00
+Dark Green          G           &G-Dark Green&00
+Yellow              y           &y-Yellow&00
+Dark Yellow         Y           &Y-Dark Yellow&00
+Magenta             m           &m-Magenta&00
+Dark Magenta        M           &M-Dark Magenta&00
+Gray                x           &x-Gray&00
+Dark Gray           X           &X-Dark Gray&00
+Black               b           &b-Black&w- (invisible on black background)&00
+White               w           &w-White&b- (invisible on white background)&00
+Orange              o           &o-Orange&00
+Dark Orange         O           &O-Dark Orange&00
+Gold                d           &d-Gold&00
+Dark Gold           D           &D-Dark Gold&00
+Purple              p           &p-Purple&00
+Dark Purple         P           &P-Dark Purple&00
+
+Colors can also have a specific background like if you wanted to &byhighlight
+&00something important.
+
+In addition to the Built in Color Codes there are two characters that can be
+used that do not have a color attached to them and they are "&C-0&00" and "&C--&00".
+The "&C-0&00" is used as "&C-&&00&00" which will reset the current style to the
+default value. The "&C--&00" is used in place of a color, and it means "&C-carry
+over the previous value&00" for whichever spot you leave it. Given that the Color
+Code format is "&C-&&FB&00" the code "&C-&&-B&00" translates to "&C-use the previous
+foreground color with this new background color&00" and the code "&C-&&F-&00" translates
+to "&C-use this new foreground on the previous background color&00."
+
+That's a brief explanation of color codes and colors.&00

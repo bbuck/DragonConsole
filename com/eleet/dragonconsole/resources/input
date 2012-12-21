@@ -1,0 +1,46 @@
+&00&c--- &X-Dragon&x-Console &00Input Script &c---&00
+
+One of the new features of &X-Dragon&x-Console &003.0 is Input Script, the first in a
+series of scriptable text segments that will give the programmer more control
+over how text is displayed and handled in the console.
+
+&R-- What does Input Script Do?&00
+
+Input Script only works when you are using "&C-Inline Input&00" (which is on by
+default) and it allows you to specify where in your output you want input to
+start and end and how it should be displayed. There are four ways to set up
+input:
+
+&G-Un-Protected Infinite &00- The user can type from the last line of output until
+they choose to stop, pressing enter will cause the Console to read the input and
+send it to it's registered CommandProcessor if one has been registered.
+
+&G-Protected Infinite &00- Functions the same as Un-Protected Infinite however all
+text is displayed on screen as "&C-*&00" (by default, this can be changed by calling
+the &R-setProtectedCharacter(&l-char&R-)&00 of the &X-Dragon&x-Console class).
+
+&G-Un-Protected Ranged &00- Ranged Input is input that has a set number of characters.
+Ranged Input is also the only input that have more output after the "&C-input area&00"
+as Infinite Input ignores anything after the Input Script. Ranged Input can be
+useful when designing menu systems.
+
+&G-Protected Ranged &00- Functions the same as Ranged input, however any input from
+the user is output as the protected character which is, by default, a "&C-*&00".
+
+&R-- What does Input Script Look Like?&00
+
+Now you know what Input Script does, but what does it look like? Input Script is
+formatted as follows
+
+  &C-%%i#+;&00
+
+Let's break that down and explain each part. The "&C-%%&00" is the &X-Dragon&x-Console
+Script character that notifies the console that Script will follow. The "&C-i&00"
+tells the console that this is Input Script, the "&C-#&00" is a valid &l-integer&00 that
+specifies the maximum range of the input, if the input is Infinite (has no max
+range) then you can omit the number. The final character "&C-+&00" tells the console
+if this input is protected or not. The "&C-+&00" tells the console to protect this
+input, a "&C--&00" tells the console not to protect this input, or you can omit this
+character and the console assumes the input should not be protected.
+
+I hope that helped you better understand Input Script.&00
