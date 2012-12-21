@@ -3,7 +3,6 @@
 ## Preview
 
 ![Dragon Console Image 1](http://content.screencast.com/users/izuriel/folders/Jing/media/72276c8d-7987-4622-ac41-c29b8995ffab/2010-11-23_0008.png)
-![Dragon Console Image 2](http://content.screencast.com/users/izuriel/folders/Jing/media/3a597a62-4b81-448f-bb38-587405aea8ea/2010-11-23_0010.png)
 
 ## About
 
