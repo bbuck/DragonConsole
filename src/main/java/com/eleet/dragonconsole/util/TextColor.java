@@ -37,7 +37,7 @@ public class TextColor implements Comparable {
     private char charCode;
     private Color color;
 
-    /** 
+    /**
      * This Constructor will create a new TextColor with the given Character
      * as the code for the Color passed. If '0' (zero) or '-' (hyphen) are
      * passed as the Character code then an InvalidCharCodeException is thrown
@@ -54,7 +54,7 @@ public class TextColor implements Comparable {
         this.color = color;
     }
 
-    /** 
+    /**
      * This Constructor is only called from an static method in this class and
      * is used for testing purposes only. A TextColor object is created with
      * the given Character as a code but the Color is set to null.
@@ -65,7 +65,7 @@ public class TextColor implements Comparable {
         this.color = null;
     }
 
-    /** 
+    /**
      * This Constructor is only called from an static method in this class and
      * is used for testing purposes only. A TextColor object is created with
      * the given Color but the Character Code is set to '-'.
@@ -88,7 +88,7 @@ public class TextColor implements Comparable {
         return new TextColor(charCode);
     }
 
-    /** 
+    /**
      * This method creates a dummy TextColor with the specified Color but no
      * Character code, this dummy Objects purpose is for making comparisons to
      * other TextColor Objects when all you have to compare with is the
@@ -100,7 +100,7 @@ public class TextColor implements Comparable {
         return new TextColor(color);
     }
 
-    /** 
+    /**
      * Returns the Character Code assigned to this TextColor Object.
      * @return The Character Code assigned to this TextColor Object.
      */
@@ -108,7 +108,7 @@ public class TextColor implements Comparable {
         return charCode;
     }
 
-    /** 
+    /**
      * Returns the Color assigned to this TextColor Object.
      * @return The Color assigned to this TextColor Object.
      */
@@ -116,14 +116,13 @@ public class TextColor implements Comparable {
         return color;
     }
 
-    /** 
+    /**
      * Compares a Character or the Character of another TextColor Object to the
      * Character code of this TextColor Object and returns their compareTo()
      * result.
      * @param o The other Object to compare to, either Character or TextColor.
      * @return The compareTo() value of the two Characters.
      */
-    @Override
     public int compareTo(Object o) {
         String cName = o.getClass().getName();
 
@@ -141,7 +140,7 @@ public class TextColor implements Comparable {
         return 0;
     }
 
-    /** 
+    /**
      * This method determines if this TextColor is equal to the Object given.
      * This method will compare a Character to this TextColors Character Code
      * or compare this TextColor to another TextColor. If a Dummy TextColor is
@@ -174,7 +173,7 @@ public class TextColor implements Comparable {
             return false;
     }
 
-    /** 
+    /**
      * This method will display the Character code, and then called the
      * toString() method on the Color that it represents. In the case of a
      * dummy TextColor then the Character code or the Color (whichever is not

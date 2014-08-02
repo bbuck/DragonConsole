@@ -1,3 +1,5 @@
+package com.eleet.dragonconsole;
+
 /*
  * Copyright (c) 2010 3l33t Software Developers, L.L.C.
  *
@@ -20,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-import com.eleet.dragonconsole.*;
 import com.eleet.dragonconsole.file.FileProcessor;
 
 /**
@@ -144,12 +145,12 @@ public class DemoProcessor extends CommandProcessor {
         if (!inputDemo)
             output("\n\n&ob>>&00 ");
     }
-    
+
     /**
      * Displays a help menu with available output options for the user to view.
      */
     public void outputHelp() {
-        String help = "\n\n&c--- &X-Dragon&x-Console &c-" + getConsole().getVersion() 
+        String help = "\n\n&c--- &X-Dragon&x-Console &c-" + getConsole().getVersion()
                 + " ---------------\n"
                 + "   &w-INFO &o-View information on certain topics.\n"
                 + "   &w-   EX: INFO COLORS\n"
@@ -160,14 +161,14 @@ public class DemoProcessor extends CommandProcessor {
                 + " enable/disable DCCCs\n"
                 + "         &w-EX: ANSI ON\n"
                 + "                ANSI OFF\n"
-                + "   &w-DEMO &o-Demo the different input methods (ranged and" 
+                + "   &w-DEMO &o-Demo the different input methods (ranged and"
                 + "infinite) as well as protected \n"
                 + "           and unprotected.\n"
                 + "   &w-   EX: DEMO INPUT RANGED\n          "
                 + "DEMO INPUT RANGED PROTECTED\n"
                 + "   EXIT &o-Quits the demonstration program\n"
                 + "&c----------------------------------------";
-        
+
         output(help);
     }
 
