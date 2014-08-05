@@ -22,10 +22,15 @@
 
 package com.eleet.dragonconsole.file;
 
-import java.io.*;
 import java.awt.Font;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
-/** 
+/**
  * Receives a file path and then reads the contents of the file into the proper
  * format and returns the Object back to the caller. This is a static class and
  * should not be instantiated.
@@ -33,7 +38,7 @@ import java.awt.Font;
  * @version 1.0
  */
 public class FileProcessor {
-    /** 
+    /**
      * This method creates a File Object from the given path and then returns
      * the String that is read by <code>redText(File)</code>.
      * @param filePath The Absolute or Relative path to the File.
@@ -44,7 +49,7 @@ public class FileProcessor {
         return readText(new File(filePath));
     }
 
-    /** 
+    /**
      * This method will read plain text files and return the contents as a
      * String value, if the file exists. This method will separate each line
      * with a "\n\r" as the DragonConsole ignores the character '\r' but this
@@ -84,7 +89,7 @@ public class FileProcessor {
         return contents;
     }
 
-    /** 
+    /**
      * This method will read a plain text file in the
      * "/com/eleet/dragonconsole/resources/" package in the JAR and return its
      * contents as a String. All files in this directory are help files of
@@ -95,7 +100,7 @@ public class FileProcessor {
      */
     public static String readDCResource(String file) {
         String contents = "";
-        
+
         try {
             InputStream is = FileProcessor.class.getResourceAsStream("/com/eleet/dragonconsole/resources/" + file);
             InputStreamReader isr = new InputStreamReader(is);
@@ -122,7 +127,7 @@ public class FileProcessor {
         return contents;
     }
 
-    /** 
+    /**
      * This method will create an InputStream used to load the Font file
      * stored in the JAR in as a Font object for use with DragonConsole.
      * @return Font Object created from the Font file in the JAR.
@@ -148,3 +153,4 @@ public class FileProcessor {
         return consoleFont;
     }
 }
+
