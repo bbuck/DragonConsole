@@ -31,6 +31,11 @@
         <url>https://github.com/bbuck/DragonConsole/issues</url>
     </issueManagement>
 
+    <ciManagement>
+        <system>travis</system>
+        <url>https://travis-ci.org/bbuck/DragonConsole</url>
+    </ciManagement>
+
     <distributionManagement>
         <repository>
             <id>sonatype-ossrh</id>

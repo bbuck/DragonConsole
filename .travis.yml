@@ -1,0 +1,16 @@
+language: java
+jdk:
+  - openjdk7
+
+before_install:
+  - java -version
+  - mvn -B -V --settings .travis-settings.xml dependency:go-offline # Pre-download all deps and plugins, so the actual script is less verbose.
+
+script:
+  # go-offline doesn't seem to be completely enough, some deps are still (re-?) downloaded in the build. Can't use --offline, since we deploy.
+  - mvn -B -V --settings .travis-settings.xml clean deploy
+
+env:
+  global:
+    - secure: "HBhNU81K5UbPz3rq5nKKDOWufNPzxbB0YHpGA3nsW42Aw558FHLYNQrfCYo1ztEs5HpPOzZexdDgzaZhR9Rzti0Cr7Lm2z1hKXyJ6G22zSH19DoGOJD/JB4kwnZrOBhD8SDsdBfTupap1qFUOWLzrBoh7CZykS+V6IWxi7KMBq5FXU6++lmRuK9QmPSUQUQkfU3q2ay2em00kt+s/UfVe1eyfzj+l8rvkQSiRjidN8wzSfEisd2FyZkBv7FaBz03t/2xIHM5FpjvdP+bAyTzmL403cCkU4ZexMOsQzn+kz0JIeLRjY1u4+ixQMyTSQDWl5CD+knW61fr4UmtpxGGG/6BLWbQn6/djfcSA676WEVHZyvuQhX85OJMcEJ14S/L5sS/irxkrIUt6Dk/KzwnzimrKksfvYnLKNpvq0Vg3unEFifY0AgPPFWxj/dOOLL9gfrBGxk47vcdB7CwUcR2LiCxjIW0LEcQToWwKfynEDkBsIwHGE5XXyRup4DpJzUq6GfWRcg+d4y5vmfJ5TNSIpcTXLgAzp/09pr3EsWLBFrfpeRpj2LUIagG0mX/crr7TYGnR3CMjFtBqVt93NmxWmBzyAd5FjYkk5b9P7WgGUR5GteiOUyDuUaUfPlGiFpVR6zfyTBW3qW/nnV7IZxWGQvvrgdBQBLflWO9TSVstKM="
+    - secure: "l0bXCkrsn9B9+5u1NrPTYQxJm0mRNi33j+YKsWBMeVE+FhB+6ZOGtRAehkKQ9Dd7020Fe4MnNifnCN3cHjWrZxp34UDdgdGvDwkDG0o8Z3jAFmSXuGULP+1PK0S169SvmicgxJ+VDbv/MCMQKdLJpOApHOrbpPolZFrWPvwuBGswav8qB1Ba+OJcmGIcY37tCPLfdYsQba5UGI2gZmKJCGGDF3QHDQPsBhUzRgbBjfIzPZthjLj630D6NbLsjN1+CawmL8MYFqmvYBAnsh+udiXTvdoX/sseG/e1rUvoaBfEH5C8IqWLZIOJu7f4Jcc7zU0qDAq5/prIf6GCLrCZp02p4VgamSXMntbRzYBMQq084HxKFGUEF8f/DdncJ63r8ahrgORqVJ4xK59W85Zin9b/wDmv5YMofaxTNh0tsdyDpQq2411rtVVSo9/pFJyoZItEuw3PPMnICmlDmJhdjhtgn6RmD4HPY3l7lAhOZBIqW8PwJLuDBnb9zwOIadOlK8G5/9nm+dPPGbhoiHqAA2RnJaO0ZyihmYhEKSLYUaGZtH8Ddg86SeR60Vk8ydVNMtTPa4I5/i+7oUSGWLxUuYR8N8GTmeLSWULWxiDp4Od70vQtFETOyMFQrAvUH3bGkoCh5TCMZ+4YF7fC9xUavsUK25RYrHQxIiJY4+aINbg="
