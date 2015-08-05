@@ -1071,7 +1071,7 @@ public class DragonConsole extends JPanel implements KeyListener,
      * @param code The Character code for the new TextColor.
      * @param color The background color for the new Character code.
      * @throws
-     * com.eleet.dragonconsole.util.TextColor.TextColor.InvalidCharCodeException
+     * com.eleet.dragonconsole.util.TextColor.InvalidCharCodeException
      */
     public void addTextColor(char code, Color color) 
             throws com.eleet.dragonconsole.util.TextColor.InvalidCharCodeException {
@@ -1344,33 +1344,31 @@ public class DragonConsole extends JPanel implements KeyListener,
     }
 
     /** 
-     * This method creates a thread that will set the
+     * This method updates the
      * <code>consoleScrollPane</code>s Vertical <code>JScrollBar</code> to
-     * it's maximum value. The Thread is delayed by a tenth of a second before
-     * the value is changed to give time for the computer to fully update the
-     * UI and change the JScrollBars value.
+     * it's maximum value.
      */
     protected void setScrollBarMax() {
         final JScrollBar vBar = consoleScrollPane.getVerticalScrollBar();
         final DragonConsole console = this;
         if (isScrollBarAtMax) {
-            new Thread() {
-                public void run() {
-                    try {
-                        sleep(80); // Time out for a tenth of a second
-                        if (vBar.isVisible())
-                            vBar.setValue(vBar.getMaximum() - vBar.getModel().getExtent());
+            SwingUtilities.invokeLater(
+                    new Runnable() {
+                        public void run() {
+                            try {
+                                if (vBar.isVisible())
+                                    vBar.setValue(vBar.getMaximum() - vBar.getModel().getExtent());
 
-                        console.repaint();
-                    } catch (Exception exc) {
-                        JOptionPane.showMessageDialog(null,
-                                "Error #0005\n"
-                              + "Failed to set the JScrollBar to Max Value!\n"
-                              + exc.getMessage(),
-                              "Error Caught", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            }.start();
+                                console.repaint();
+                            } catch (Exception exc) {
+                                JOptionPane.showMessageDialog(null,
+                                        "Error #0005\n"
+                                                + "Failed to set the JScrollBar to Max Value!\n"
+                                                + exc.getMessage(),
+                                        "Error Caught", JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                    });
         }
     }
 
