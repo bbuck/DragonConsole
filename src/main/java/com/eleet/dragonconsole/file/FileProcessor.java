@@ -34,6 +34,7 @@ import java.io.InputStreamReader;
  * Receives a file path and then reads the contents of the file into the proper
  * format and returns the Object back to the caller. This is a static class and
  * should not be instantiated.
+ * 
  * @author Brandon E Buck
  * @version 1.0
  */
@@ -41,6 +42,7 @@ public class FileProcessor {
     /**
      * This method creates a File Object from the given path and then returns
      * the String that is read by <code>redText(File)</code>.
+     * 
      * @param filePath The Absolute or Relative path to the File.
      * @return The String contents contained within the File.
      * @throws FileNotFoundException
@@ -54,6 +56,7 @@ public class FileProcessor {
      * String value, if the file exists. This method will separate each line
      * with a "\n\r" as the DragonConsole ignores the character '\r' but this
      * can still be a useful line separator.
+     * 
      * @param file The File that needs to be read.
      * @return The String contents of the File given.
      * @throws FileNotFoundException
@@ -75,12 +78,12 @@ public class FileProcessor {
                 in.close();
                 fread.close();
 
-            } catch(Exception exc) {
+            } catch (Exception exc) {
                 javax.swing.JOptionPane.showMessageDialog(null,
                         "Error #0008\n"
-                      + "Failed to read the given File.\n"
-                      + exc.getMessage(),
-                      "Error Caught", javax.swing.JOptionPane.ERROR_MESSAGE);
+                                + "Failed to read the given File.\n"
+                                + exc.getMessage(),
+                        "Error Caught", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
 
         } else
@@ -95,6 +98,7 @@ public class FileProcessor {
      * contents as a String. All files in this directory are help files of
      * some kind written for the developer using DragonConsole (not the user)
      * and the License for this Project as well as the License for the Font.
+     * 
      * @param file The File in the resources folder in the JAR to read.
      * @return The String contents of the File with the given name.
      */
@@ -116,12 +120,12 @@ public class FileProcessor {
             isr.close();
             is.close();
 
-        } catch(Exception exc) {
+        } catch (Exception exc) {
             javax.swing.JOptionPane.showMessageDialog(null,
                     "Error #0009\n"
-                  + "Failed to read the file from the jar!\n"
-                  + exc.getMessage(),
-                  "Error Caught", javax.swing.JOptionPane.ERROR_MESSAGE);
+                            + "Failed to read the file from the jar!\n"
+                            + exc.getMessage(),
+                    "Error Caught", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
 
         return contents;
@@ -130,6 +134,7 @@ public class FileProcessor {
     /**
      * This method will create an InputStream used to load the Font file
      * stored in the JAR in as a Font object for use with DragonConsole.
+     * 
      * @return Font Object created from the Font file in the JAR.
      */
     public static Font getConsoleFont() {
@@ -142,15 +147,14 @@ public class FileProcessor {
 
             is.close();
 
-        } catch(Exception exc) {
+        } catch (Exception exc) {
             javax.swing.JOptionPane.showMessageDialog(null,
                     "Error #0010\n"
-                  + "Failed to load the font file from the jar!\n"
-                  + exc.getMessage(),
-                  "Error Caught", javax.swing.JOptionPane.ERROR_MESSAGE);
+                            + "Failed to load the font file from the jar!\n"
+                            + exc.getMessage(),
+                    "Error Caught", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
 
         return consoleFont;
     }
 }
-

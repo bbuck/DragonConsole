@@ -22,13 +22,14 @@ package com.eleet.dragonconsole;
  * THE SOFTWARE.
  */
 
-import com.eleet.dragonconsole.file.FileProcessor;
+import dev.bbuck.dragonconsole.file.FileProcessor;
 
 /**
  * This class is used when the .jar for DragonConsole is run by itself and
  * functions as a Demonstration of what DragonConsole is and what it is capable
  * of doing. This class is an extension of CommandProcessor and is used to
- * process basic user input.<br /><br />
+ * process basic user input.<br />
+ * <br />
  * <b>Usable Commands</b><br />
  * info (colors|ANSI|input) - Displays the corresponding file<br />
  * license (dragonconsole|font) - Displays the license for the corresponding
@@ -37,6 +38,7 @@ import com.eleet.dragonconsole.file.FileProcessor;
  * demo input (ranged|infinite) (protected| ) - Demonstration of the four
  * different styles of input possible.<br />
  * exit - Exits the program.
+ * 
  * @author Brandon E Buck
  */
 public class DemoProcessor extends CommandProcessor {
@@ -109,14 +111,14 @@ public class DemoProcessor extends CommandProcessor {
                         if (cmd.length > 3) {
                             if (cmd[3].equals("protected")) {
                                 output("\n\n&c-                       +--------------------+\n"
-                                     + "&l-Enter Protected Input:&c- |%i20+;|\n"
-                                     + "&c-                       +--------------------+&00");
+                                        + "&l-Enter Protected Input:&c- |%i20+;|\n"
+                                        + "&c-                       +--------------------+&00");
                                 inputDemo = true;
                             }
                         } else {
                             output("\n\n&c-                    +--------------------+\n"
-                                 + "&l-Enter Ranged Input:&c- |%i20;|\n"
-                                 + "&c-                    +--------------------+&00");
+                                    + "&l-Enter Ranged Input:&c- |%i20;|\n"
+                                    + "&c-                    +--------------------+&00");
                             inputDemo = true;
                         }
                     } else if (cmd.length > 2 && cmd[2].equals("infinite")) {
@@ -175,6 +177,7 @@ public class DemoProcessor extends CommandProcessor {
     /**
      * Overrides the default output in CommandProcessor to determine if ANSI
      * Colors are processed or DCCC and converts accordingly.
+     * 
      * @param s The String to output.
      */
     @Override
