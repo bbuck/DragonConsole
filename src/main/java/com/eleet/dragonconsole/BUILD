@@ -10,7 +10,7 @@ java_library(
         "//src/main/java/com/eleet/dragonconsole/util:input_controller",
         "//src/main/java/com/eleet/dragonconsole/util:prompt_panel",
         "//src/main/java/com/eleet/dragonconsole/util:text_color",
-        "//src/main/kotlin/dev/bbuck/dragonconsole:file_processor",
+        "//src/main/kotlin/dev/bbuck/dragonconsole/file:file_processor",
     ],
 )
 
@@ -19,7 +19,7 @@ java_library(
     srcs = ["DemoProcessor.java"],
     deps = [
         ":dragon_console",
-        "//src/main/kotlin/dev/bbuck/dragonconsole:file_processor",
+        "//src/main/kotlin/dev/bbuck/dragonconsole/file:file_processor",
     ],
 )
 

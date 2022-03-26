@@ -11,8 +11,28 @@ import java.io.InputStreamReader
 import javax.swing.JOptionPane
 import javax.swing.JOptionPane.showMessageDialog
 
+/**
+ * Reads the contents of the file pointed to by the give file path.
+ *
+ * @param filePath is the absolute or relative path to the file.
+ * @return the entire contents of the file as a string.
+ * @throws IllegalArgumentException if the file does not exist
+ *
+ * @since 3.0
+ * @author Brandon Buck
+ */
 fun readText(filePath: String): String = readText(File(filePath))
 
+/**
+ * Reads the contents of the given file.
+ *
+ * @param file is the file that will have it's content read.
+ * @return the entire contents of the file as a string.
+ * @throws IllegalArgumentException if the file does not exist
+ *
+ * @since 3.0
+ * @author Brandon Buck
+ */
 fun readText(file: File): String {
     if (!file.exists()) {
         throw IllegalArgumentException("File does not exist at path \"${file.absolutePath}\"")
@@ -47,6 +67,15 @@ fun readText(file: File): String {
     return contents.toString()
 }
 
+/**
+ * Reads a file that is stored in the JAR alongside DragonConsole.
+ *
+ * @param file is the name of the resource that should be read.
+ * @return the entire contents of the file as a string.
+ *
+ * @since 3.0
+ * @author Brandon Buck
+ */
 fun readDCResource(file: String): String {
     val contents = StringBuilder()
 
@@ -77,6 +106,14 @@ fun readDCResource(file: String): String {
     return contents.toString()
 }
 
+/**
+ * Reads the font file stored alongside the DragonConsole in the JAR file.
+ *
+ * @return the font read from the JAR.
+ *
+ * @since 3.0
+ * @author Brandon Buck
+ */
 fun getConsoleFont(): Font? {
     var font: Font? = null
 
