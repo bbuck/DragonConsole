@@ -6,3 +6,9 @@ kt_jvm_library(
     name = "text_color",
     srcs = ["TextColor.kt"],
 )
+
+kt_jvm_library(
+    name = "document_styler",
+    srcs = ["DocumentStyler.kt"],
+    deps = [":text_color"],
+)

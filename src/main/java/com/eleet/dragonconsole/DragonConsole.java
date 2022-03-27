@@ -32,6 +32,7 @@ import com.eleet.dragonconsole.util.*;
 import java.awt.datatransfer.DataFlavor;
 import dev.bbuck.dragonconsole.file.FileProcessor;
 import dev.bbuck.dragonconsole.text.TextColor;
+import dev.bbuck.dragonconsole.text.DocumentStyler;
 
 /**
  * DragonConsole is a console mimic designed to give Java programmers a RTF
@@ -1121,7 +1122,7 @@ public class DragonConsole extends JPanel implements KeyListener,
         if (!useInlineInput)
             consolePrompt.addColor(newColor);
 
-        consoleStyledDocument = DocumentStyler.addNewColor(consoleStyledDocument, consoleFont, newColor, textColors);
+        consoleStyledDocument = DocumentStyler.addNewColor(consoleStyledDocument, newColor, textColors);
     }
 
     /**
