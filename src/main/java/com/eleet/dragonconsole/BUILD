@@ -1,3 +1,5 @@
+package(default_visibility = ["//src/main:__subpackages__"])
+
 java_library(
     name = "dragon_console",
     srcs = [
@@ -31,8 +33,7 @@ java_library(
 
 java_binary(
     name = "dragon_console_demo",
-    srcs = ["Main.java"],
-    main_class = "com.eleet.dragonconsole.Main",
+    main_class = "dev.bbuck.dragonconsole.Demo",
     resources = [
         "//src/main/resources/com/eleet/dragonconsole:resources/ansi",
         "//src/main/resources/com/eleet/dragonconsole:resources/colors",
@@ -42,8 +43,7 @@ java_binary(
         "//src/main/resources/com/eleet/dragonconsole:resources/logo_b",
         "//src/main/resources/com/eleet/dragonconsole:resources/logo_w",
     ],
-    deps = [
-        ":demo_processor",
-        ":dragon_console_frame",
+    runtime_deps = [
+        "//src/main/kotlin/dev/bbuck/dragonconsole:demo",
     ],
 )
