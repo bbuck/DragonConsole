@@ -7,11 +7,6 @@ java_library(
 )
 
 java_library(
-    name = "debug",
-    srcs = ["Debug.java"],
-)
-
-java_library(
     name = "document_styler",
     srcs = ["DocumentStyler.java"],
     deps = ["//src/main/kotlin/dev/bbuck/dragonconsole/text:text_color"],
@@ -20,7 +15,7 @@ java_library(
 java_library(
     name = "input_string",
     srcs = ["InputString.java"],
-    deps = [":debug"],
+    deps = ["//src/main/kotlin/dev/bbuck/dragonconsole/log:debug"],
 )
 
 java_library(
