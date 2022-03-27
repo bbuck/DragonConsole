@@ -26,12 +26,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.*;
 import java.util.ArrayList;
+import dev.bbuck.dragonconsole.text.TextColor;
 
 /**
  * This class is used with the alternative method of input (not Inline Input).
  * The purpose of this class is as an expanding panel that contains an editable
  * PromptLabel (editable meaning it can be changed during program execution) and
  * the InputArea that expands automatically as text wraps.
+ *
  * @author Brandon E Buck
  */
 public class PromptPanel extends JPanel {
@@ -40,10 +42,11 @@ public class PromptPanel extends JPanel {
     /**
      * Constructs a new PromptPanel, and initializes the promptLabel with the
      * values passed.
-     * @param prompt String representation of the Prompt that you want
-     *  displayed before the <code>inputArea</code>.
+     *
+     * @param prompt       String representation of the Prompt that you want
+     *                     displayed before the <code>inputArea</code>.
      * @param defaultColor The default color code from the DragonConsole, used
-     *  for coloring the PromptPanel.
+     *                     for coloring the PromptPanel.
      */
     public PromptPanel(String prompt, String defaultColor) {
         promptLabel = new PromptLabel(prompt, defaultColor);
@@ -55,8 +58,9 @@ public class PromptPanel extends JPanel {
     /**
      * This method will set the text of the <code>promptLabel</code> to the
      * new String given.
+     *
      * @param newPrompt String containing the new prompt for the PromptPanel to
-     *  display.
+     *                  display.
      */
     public void setPrompt(String newPrompt) {
         promptLabel.setText(newPrompt);
@@ -66,8 +70,9 @@ public class PromptPanel extends JPanel {
      * This method is used to prevent the programmer from getting access to the
      * PromptLabel. It sends the parameter given to the same method within the
      * PromptLabel.
+     *
      * @param defaultColor The new defaultColor that has been changed in the
-     *  DragonConsole.
+     *                     DragonConsole.
      */
     public void setDefaultColor(String defaultColor) {
         promptLabel.setDefaultColor(defaultColor);
@@ -77,8 +82,9 @@ public class PromptPanel extends JPanel {
      * This method is used to prevent the programmer from getting access to the
      * PromptLabel. It sends the parameter given to the same method within the
      * PromptLabel.
+     *
      * @param color The new TextColor that needs to be added to the list of
-     *  colors in the PromptLabel.
+     *              colors in the PromptLabel.
      */
     public void addColor(TextColor color) {
         promptLabel.addColor(color);
@@ -97,8 +103,9 @@ public class PromptPanel extends JPanel {
      * This method is used to prevent the programmer from getting access to the
      * PromptLabel. It sends the parameter given to the same method within the
      * PromptLabel.
+     *
      * @param color The TextColor that needs to be removed from the list of
-     *  TextColors in the PromptLabel.
+     *              TextColors in the PromptLabel.
      */
     public void removeColor(TextColor color) {
         promptLabel.removeColor(color);
@@ -108,8 +115,9 @@ public class PromptPanel extends JPanel {
      * This method is used to prevent the programmer from getting access to the
      * PromptLabel. It sends the parameter given to the same method within the
      * PromptLabel.
+     *
      * @param colorCodeChar The new colorCodeChar if it's been changed in the
-     *  DragonConsole.
+     *                      DragonConsole.
      */
     public void setColorCodeChar(char colorCodeChar) {
         promptLabel.setColorCodeChar(colorCodeChar);
@@ -117,6 +125,7 @@ public class PromptPanel extends JPanel {
 
     /**
      * Returns the prompt, stripped of color codes, from the PromptLabel.
+     *
      * @return The text in the PromptLabel stripped of DCCC codes.
      */
     public String getPrompt() {
@@ -126,6 +135,7 @@ public class PromptPanel extends JPanel {
     /**
      * Changes the font of the PromptLabel so that it reflects the same font as
      * that of the DragonConsole.
+     *
      * @param font The new Font that should be used by the PromptLabel.
      */
     public void setPromptFont(Font font) {
@@ -137,6 +147,7 @@ public class PromptPanel extends JPanel {
     /**
      * Sets the default foreground color of the PromptLabel so that prompts that
      * are not colored by DCCCs will still feel like part of the console.
+     *
      * @param c The new Color to use for the Foreground for the PromptLabel.
      */
     public void setPromptForeground(Color c) {
@@ -160,12 +171,13 @@ public class PromptPanel extends JPanel {
         /**
          * Constructs a new PromptLabel with the given text as a prompt and the
          * defaultColor that is given.
-         * @param text The text to use as the initial prompt.
+         *
+         * @param text         The text to use as the initial prompt.
          * @param defaultColor The initial defaultColor of the DragonConsole.
          */
         public PromptLabel(String text, String defaultColor) {
             super(text);
-            this.defaultColor= defaultColor;
+            this.defaultColor = defaultColor;
             this.colors = new ArrayList<TextColor>();
         }
 
@@ -173,6 +185,7 @@ public class PromptPanel extends JPanel {
          * Adds a new TextColor to the list of TextColors in the PromptLabel,
          * these Colors are used for processing the DCCCs in the paint method to
          * properly display the Prompt.
+         *
          * @param color The new TextColor to add to the list of TextColors.
          */
         public void addColor(TextColor color) {
@@ -184,6 +197,7 @@ public class PromptPanel extends JPanel {
          * Removes a TextColor from the list of TextColors. This method is
          * called when a TextColor is removed from the DragonConsole to keep
          * the two lists equivalent.
+         *
          * @param color The TextColor to remove from the list of TextColors.
          */
         public void removeColor(TextColor color) {
@@ -194,6 +208,7 @@ public class PromptPanel extends JPanel {
         /**
          * Changes the default color String to the new String. This method is
          * called when the defaultColor is altered in the DragonConsole.
+         *
          * @param defaultColor The new two character defaultColor String.
          */
         public void setDefaultColor(String defaultColor) {
@@ -214,8 +229,9 @@ public class PromptPanel extends JPanel {
          * called when the colorCodeChar is altered in the DragonConsole so
          * that processing DCCCs works the same for the Prompt and adding text
          * to the Console.
+         *
          * @param colorCodeChar The new colorCodeChar to note the beginning of
-         *  a DCCC.
+         *                      a DCCC.
          */
         public void setColorCodeChar(char colorCodeChar) {
             this.colorCodeChar = colorCodeChar;
@@ -228,6 +244,7 @@ public class PromptPanel extends JPanel {
          * DCCC is encountered it paints the text at the proper location with
          * the current style and then continues processing the prompt String for
          * mor DCCCs until it finished.
+         *
          * @param g The pre built Graphics object for rendering this component.
          */
         @Override
@@ -239,7 +256,7 @@ public class PromptPanel extends JPanel {
             String style = defaultColor;
             for (int i = 0; i < text.length(); i++) {
                 if (text.charAt(i) == colorCodeChar) {
-                    if ( ((i + 1) < text.length()) &&
+                    if (((i + 1) < text.length()) &&
                             (text.charAt(i + 1) == colorCodeChar)) {
                         processed += colorCodeChar;
                         i += 1; // Jump past the - (&&)
@@ -268,26 +285,26 @@ public class PromptPanel extends JPanel {
          * the x coordinate giving and if anything is painting this method will
          * return the x coordinate where the next portion of text should be
          * painted.
+         *
          * @param processed The portion of the String that needs to be painted.
-         * @param style The Style containing the Colors to paint the String
-         *  with.
-         * @param g The Graphics Object that will do the painting.
-         * @param x The x coordinate that tells where to begin painting.
+         * @param style     The Style containing the Colors to paint the String
+         *                  with.
+         * @param g         The Graphics Object that will do the painting.
+         * @param x         The x coordinate that tells where to begin painting.
          * @return The ending x coordinate so that the next String to get
-         *  painted will not overlap any other String.
+         *         painted will not overlap any other String.
          */
         private int paintProcessed(String processed, String style, Graphics g, int x) {
             if (processed.length() > 0) {
-                ((Graphics2D)g).setRenderingHint(
+                ((Graphics2D) g).setRenderingHint(
                         RenderingHints.KEY_TEXT_ANTIALIASING,
                         RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-
                 Rectangle2D bounds = g.getFontMetrics().getStringBounds(processed, g);
 
-                int w = (int)(bounds.getWidth());
-                int h = (int)(bounds.getHeight());
-                int newX = x + (int)(bounds.getWidth());
+                int w = (int) (bounds.getWidth());
+                int h = (int) (bounds.getHeight());
+                int newX = x + (int) (bounds.getWidth());
                 int y = h - 3;
 
                 g.setColor(getColorFromDCCC(style.charAt(1)));
@@ -302,11 +319,13 @@ public class PromptPanel extends JPanel {
             return x;
         }
 
-        /** .
+        /**
+         * .
          * This method processes a color code passed from append and sets the
          * <code>currentStyle</code> variable accordingly.
+         *
          * @param code The new color code by which to set
-         *  <code>currentStyle</code>.
+         *             <code>currentStyle</code>.
          */
         private String setCurrentStyle(String code, String currentStyle) {
             String oldStyle = currentStyle;
@@ -329,20 +348,20 @@ public class PromptPanel extends JPanel {
 
             } else
                 currentStyle = oldStyle;
-            
+
             return currentStyle;
         }
 
         /**
          * Searches the list of TextColors for the one associated with the
          * given character and returns the Color associated with it.
+         *
          * @param code The character code to find the Color for.
          * @return The Color that is assigned to this Character code.
          */
         private Color getColorFromDCCC(char code) {
-            TextColor test = TextColor.getTestTextColor(code);
             for (int i = 0; i < colors.size(); i++) {
-                if (colors.get(i).equals(test))
+                if (colors.get(i).getCharCode() == code)
                     return colors.get(i).getColor();
             }
 
@@ -351,6 +370,7 @@ public class PromptPanel extends JPanel {
 
         /**
          * Returns the text stored in this label without the DCCC codes.
+         *
          * @return The text stored in this label without the DCCC codes.
          */
         @Override
@@ -362,6 +382,7 @@ public class PromptPanel extends JPanel {
          * Steps through a String character by character and removes all of the
          * DCCCs that begin with the <code>colorCodeChar</code> and returns
          * the String without any DCCCs present.
+         *
          * @param toTrim The String with DCCCs that needs to be trimmed.
          * @return The String after all the DCCCs have been removed from it.
          */
@@ -370,7 +391,7 @@ public class PromptPanel extends JPanel {
             for (int i = 0; i < buffer.length(); i++) {
                 if (buffer.charAt(i) == colorCodeChar) {
                     if (buffer.charAt(i) == colorCodeChar) {
-                        if ( ((i + 1) < buffer.length()) &&
+                        if (((i + 1) < buffer.length()) &&
                                 (buffer.charAt(i + 1) == colorCodeChar)) {
                             buffer.replace((i + 1), (i + 2), "");
                             i += 1; // Jump past the - (&&)

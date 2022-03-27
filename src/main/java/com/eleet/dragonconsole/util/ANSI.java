@@ -27,8 +27,9 @@ import java.util.ArrayList;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
+import dev.bbuck.dragonconsole.text.TextColor;
 
-/** 
+/**
  * ANSI is a helper class that will process and create a
  * SimpleAttributeSet that has the color settings from a given String and
  * return it to the calling function. This is used to allow the DragonConsole
@@ -37,46 +38,48 @@ import javax.swing.text.StyleConstants;
  * This method will also convert DragonConsole color codes into ANSI compatible
  * codes (although if no compatible color can be found it will use the default
  * colors.
+ *
  * @author Brandon E Buck
  */
 public class ANSI {
     public static final String ESCAPE = "\033"; // ANSI Escape Character that starts commands
 
-    public static final Color BLACK = Color.BLACK;           
-    public static final Color RED = Color.RED.darker();    
-    public static final Color GREEN = Color.GREEN.darker();  
-    public static final Color YELLOW = Color.YELLOW.darker(); 
-    public static final Color BLUE = new Color(66, 66, 255).darker();  
+    public static final Color BLACK = Color.BLACK;
+    public static final Color RED = Color.RED.darker();
+    public static final Color GREEN = Color.GREEN.darker();
+    public static final Color YELLOW = Color.YELLOW.darker();
+    public static final Color BLUE = new Color(66, 66, 255).darker();
     public static final Color MAGENTA = Color.MAGENTA.darker();
-    public static final Color CYAN = Color.CYAN.darker();   
-    public static final Color WHITE = Color.GRAY.brighter(); 
+    public static final Color CYAN = Color.CYAN.darker();
+    public static final Color WHITE = Color.GRAY.brighter();
 
-    public static final Color INTENSE_BLACK = Color.GRAY.darker(); 
-    public static final Color INTENSE_RED = Color.RED;             
-    public static final Color INTENSE_GREEN = Color.GREEN;           
-    public static final Color INTENSE_YELLOW = Color.YELLOW;          
+    public static final Color INTENSE_BLACK = Color.GRAY.darker();
+    public static final Color INTENSE_RED = Color.RED;
+    public static final Color INTENSE_GREEN = Color.GREEN;
+    public static final Color INTENSE_YELLOW = Color.YELLOW;
     public static final Color INTENSE_BLUE = new Color(66, 66, 255);
-    public static final Color INTENSE_MAGENTA = Color.MAGENTA;         
-    public static final Color INTENSE_CYAN = Color.CYAN;            
-    public static final Color INTENSE_WHITE = Color.WHITE;           
+    public static final Color INTENSE_MAGENTA = Color.MAGENTA;
+    public static final Color INTENSE_CYAN = Color.CYAN;
+    public static final Color INTENSE_WHITE = Color.WHITE;
 
-    private static final Color normal[] = {BLACK, RED, GREEN, YELLOW, BLUE,
-            MAGENTA, CYAN, WHITE};
-    private static final Color bright[] = {INTENSE_BLACK, INTENSE_RED, 
+    private static final Color normal[] = { BLACK, RED, GREEN, YELLOW, BLUE,
+            MAGENTA, CYAN, WHITE };
+    private static final Color bright[] = { INTENSE_BLACK, INTENSE_RED,
             INTENSE_GREEN, INTENSE_YELLOW, INTENSE_BLUE, INTENSE_MAGENTA,
-            INTENSE_CYAN, INTENSE_WHITE};
+            INTENSE_CYAN, INTENSE_WHITE };
 
-    /** 
+    /**
      * Takes an ANSI Code as a String and breaks it apart and then creates a
      * SimpleAttributeSet with the proper Foreground and Background color.
-     * @param old The current ANSI Style so any changes not specified are
-     *  carried over.
-     * @param string The String containing the ANSI code that needs to be
-     *  processed.
+     *
+     * @param old          The current ANSI Style so any changes not specified are
+     *                     carried over.
+     * @param string       The String containing the ANSI code that needs to be
+     *                     processed.
      * @param defaultStyle The Default Style for the Console, used for ANSI
-     *  codes 39 and 49.
+     *                     codes 39 and 49.
      * @return Returns the SimpleAttributeSet with the proper colors of the
-     *  ANSI code.
+     *         ANSI code.
      */
     public static SimpleAttributeSet getANSIAttribute(SimpleAttributeSet old,
             String string, Style defaultStyle) {
@@ -84,7 +87,7 @@ public class ANSI {
 
         if (ANSI == null)
             ANSI = new SimpleAttributeSet();
-        
+
         if (string.length() > 3) {
             string = string.substring(2); // Cut off the "\033[";
             string = string.substring(0, string.length() - 1); // Remove the "m" from the end
@@ -141,16 +144,17 @@ public class ANSI {
         return ANSI;
     }
 
-    /** 
+    /**
      * Takes a String containing a DCCC and convert it into its equivalent
      * ANSI Color Code. It does this by comparing the color associated with
      * the characters in the DCCC to the ANSI colors until it finds a match and
      * then creates the proper code, adding it to the return String. If no match
      * is made it will use the default color code 39 (for FOREGROUND) or 49
      * (for BACKGROUND).
+     *
      * @param DCCode The String containing the three character DCCC.
      * @param colors The ArrayList of TextColors that have been added to the
-     *  console.
+     *               console.
      * @return The ANSI equivalent to the given DCCC.
      */
     public static String getANSICodeFromDCCode(String DCCode, ArrayList<TextColor> colors) {
@@ -158,7 +162,7 @@ public class ANSI {
             DCCode = DCCode.substring(1); // Remove the & from the code
             char foreground = DCCode.charAt(0);
             char background = DCCode.charAt(1);
-            
+
             String code = ESCAPE + "[0;";
 
             if (foreground == '0')
@@ -168,7 +172,7 @@ public class ANSI {
             else {
                 for (int i = 0; i < colors.size(); i++) {
                     TextColor tc = null;
-                    if (colors.get(i).equals(TextColor.getTestTextColor(foreground))) {
+                    if (colors.get(i).getCharCode() == foreground) {
                         tc = colors.get(i);
                         for (int x = 0; x < normal.length; x++) {
                             if (tc.getColor().equals(normal[x])) {
@@ -195,7 +199,7 @@ public class ANSI {
             else {
                 for (int i = 0; i < colors.size(); i++) {
                     TextColor tc = null;
-                    if (colors.get(i).equals(TextColor.getTestTextColor(background))) {
+                    if (colors.get(i).getCharCode() == background) {
                         tc = colors.get(i);
                         for (int x = 0; x < normal.length; x++) {
                             if (tc.getColor() == normal[x]) {
@@ -224,19 +228,20 @@ public class ANSI {
         return ESCAPE + "[39;49m";
     }
 
-    /** 
+    /**
      * Takes a String containing multiple DCCCs (like standard output for the
      * console) and replaces the DCCC with it's equivalent ANSI Code and returns
      * the String containing the ANSI Codes. This method uses
      * <code>getANSICodeFromDCCode()</code> to convert each DCCC into it's
      * ANSI code.
-     * @param string The String that the programmer wishes to convert.
-     * @param colors The ArrayList of TextColors that have been added to the
-     *  console.
+     *
+     * @param string        The String that the programmer wishes to convert.
+     * @param colors        The ArrayList of TextColors that have been added to the
+     *                      console.
      * @param colorCodeChar The default colorCodeChar (used for determining a
-     *  DCCC).
+     *                      DCCC).
      * @return Returns the String after each DCCC has been converted into it's
-     *  ANSI equivalent.
+     *         ANSI equivalent.
      */
     public static String convertDCtoANSIColors(String string, ArrayList<TextColor> colors, char colorCodeChar) {
         StringBuilder buffer = new StringBuilder(string);
@@ -248,10 +253,10 @@ public class ANSI {
 
                 } else {
                     String code = buffer.substring(i, (i + 3));
-                    
+
                     code = getANSICodeFromDCCode(code, colors);
                     int length = code.length();
-                    
+
                     buffer = buffer.replace(i, (i + 3), code);
                     i = i + length - 1;
                 }
@@ -261,28 +266,30 @@ public class ANSI {
         return buffer.toString();
     }
 
-    /** 
+    /**
      * Takes a String containing an ANSI Code and returns it's equivalent DCCC.
      * It does this by comparing the Color associated to the ANSI code to each
      * code contained in the list of TextColors and upon a successful match it
      * pulls the Character out of the TextColor and adds it to the DCCC String
      * it returns. If no match is found it uses the character representing the
      * default style set by the console.
-     * @param code The ANSI code to convert into a DCCC.
-     * @param colors The ArrayList of TextColors that have been added to the
-     *  console.
+     *
+     * @param code          The ANSI code to convert into a DCCC.
+     * @param colors        The ArrayList of TextColors that have been added to the
+     *                      console.
      * @param colorCodeChar The colorCodeChar to place at the beginning of each
-     *  DCCC.
-     * @param defaultStyle The Default Style set in the Console, used if no
-     *  match can be found.
+     *                      DCCC.
+     * @param defaultStyle  The Default Style set in the Console, used if no
+     *                      match can be found.
      * @return Returns the DCCC equivalent of the given ANSI code.
      */
-    private static String getDCCodeFromANSICode(String code, ArrayList<TextColor> colors, char colorCodeChar, String defaultStyle) {
+    private static String getDCCodeFromANSICode(String code, ArrayList<TextColor> colors, char colorCodeChar,
+            String defaultStyle) {
         boolean brighter = false;
         code = code.substring(2, code.length()); // Cut off the "\033[" and "m"
         char foreground = ' ';
         char background = ' ';
-        
+
         String colorCodes[] = code.split(";");
         for (int i = 0; i < colorCodes.length; i++) {
             if (colorCodes[i].matches("[\\d]*")) {
@@ -311,27 +318,27 @@ public class ANSI {
             foreground = defaultStyle.charAt(0);
         if (background == ' ')
             background = defaultStyle.charAt(1);
-        
+
         return "" + colorCodeChar + foreground + background;
     }
 
-    /** 
+    /**
      * Takes a Color and finds it's corresponding TextColor in the list of
      * TextColors that have been added to the Console (if there is one) and
      * returns the <code>charCode</code> associated with the Color given. If
      * no Color can be matched then it returns a blank character (' ').
-     * @param color The Color to find in the list of TextColors.
+     *
+     * @param color  The Color to find in the list of TextColors.
      * @param colors The ArrayList of TextColors that have been added to the
-     *  console.
+     *               console.
      * @return The <code>charCode</code> associated with the given color, or
-     *  a blank char (' ') if no match is found.
+     *         a blank char (' ') if no match is found.
      */
     private static char getDCCharCodeFromColor(Color color,
             ArrayList<TextColor> colors) {
-        TextColor test = TextColor.getTestTextColor(color);
 
         for (int i = 0; i < colors.size(); i++) {
-            if (colors.get(i).equals(test)) {
+            if (colors.get(i).getColor().equals(color)) {
                 return colors.get(i).getCharCode();
             }
         }
@@ -339,20 +346,22 @@ public class ANSI {
         return ' ';
     }
 
-    /** 
+    /**
      * Takes a String containing ANSI Codes and converts replaces the ANSI code
      * with it's equivalent DCCC.
-     * @param string The String containing then ANSI code the programmer wishes
-     *  to convert to DCCCs.
-     * @param colors The ArrayList of TextColors that have been added to the
-     *  Console.
+     *
+     * @param string        The String containing then ANSI code the programmer
+     *                      wishes
+     *                      to convert to DCCCs.
+     * @param colors        The ArrayList of TextColors that have been added to the
+     *                      Console.
      * @param colorCodeChar The <code>colorCodeChar</code> set in the
-     *  console.
-     * @param defaultStyle The two character Default Style set in the console.
+     *                      console.
+     * @param defaultStyle  The two character Default Style set in the console.
      * @return Returns the String after each ANSI Code has been converted to
-     *  it's DCCC equivalent.
+     *         it's DCCC equivalent.
      */
-    public static String convertANSIToDCColors(String string, 
+    public static String convertANSIToDCColors(String string,
             ArrayList<TextColor> colors, char colorCodeChar,
             String defaultStyle) {
         StringBuilder buffer = new StringBuilder(string);
@@ -364,7 +373,7 @@ public class ANSI {
                     int end = i + code.length() + 1;
                     code = getDCCodeFromANSICode(code, colors, colorCodeChar,
                             defaultStyle);
-                    
+
                     buffer = buffer.replace(i, end, code);
                     i = i + 2;
                 }
@@ -374,15 +383,16 @@ public class ANSI {
         return buffer.toString();
     }
 
-    /** 
+    /**
      * This method returns the Color associated with the given ANSI Code, it
      * also takes a boolean to test for color intensity. Returns null if
      * no color is found.
-     * @param code The ANSI Code the color is requested for.
+     *
+     * @param code     The ANSI Code the color is requested for.
      * @param brighter <code>true</code> if intensity is set to bold or
-     *  <code>false</code> if not.
+     *                 <code>false</code> if not.
      * @return Returns the Color associated with the ANSI code or null if none
-     *  is found.
+     *         is found.
      */
     private static Color getColorFromANSICode(int code, boolean brighter) {
         switch (code) {

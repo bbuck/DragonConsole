@@ -9,8 +9,8 @@ java_library(
         "//src/main/java/com/eleet/dragonconsole/util:document_styler",
         "//src/main/java/com/eleet/dragonconsole/util:input_controller",
         "//src/main/java/com/eleet/dragonconsole/util:prompt_panel",
-        "//src/main/java/com/eleet/dragonconsole/util:text_color",
         "//src/main/kotlin/dev/bbuck/dragonconsole/file:file_processor",
+        "//src/main/kotlin/dev/bbuck/dragonconsole/text:text_color",
     ],
 )
 

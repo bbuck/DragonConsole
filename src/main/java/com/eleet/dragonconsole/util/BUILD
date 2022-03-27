@@ -1,14 +1,9 @@
-package(default_visibility = ["//src/main/java/com/eleet/dragonconsole:__subpackages__"])
-
-java_library(
-    name = "text_color",
-    srcs = ["TextColor.java"],
-)
+package(default_visibility = ["//src/main:__subpackages__"])
 
 java_library(
     name = "ansi",
     srcs = ["ANSI.java"],
-    deps = [":text_color"],
+    deps = ["//src/main/kotlin/dev/bbuck/dragonconsole/text:text_color"],
 )
 
 java_library(
@@ -19,7 +14,7 @@ java_library(
 java_library(
     name = "document_styler",
     srcs = ["DocumentStyler.java"],
-    deps = [":text_color"],
+    deps = ["//src/main/kotlin/dev/bbuck/dragonconsole/text:text_color"],
 )
 
 java_library(
@@ -37,5 +32,5 @@ java_library(
 java_library(
     name = "prompt_panel",
     srcs = ["PromptPanel.java"],
-    deps = [":text_color"],
+    deps = ["//src/main/kotlin/dev/bbuck/dragonconsole/text:text_color"],
 )

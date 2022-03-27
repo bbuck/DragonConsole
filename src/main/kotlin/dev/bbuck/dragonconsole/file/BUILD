@@ -1,11 +1,6 @@
 load("@io_bazel_rules_kotlin//kotlin:jvm.bzl", "kt_jvm_library")
 
-package(
-    default_visibility = [
-        "//src/main/java/com/eleet/dragonconsole:__subpackages__",
-        "//src/main/kotlin/dev/bbuck/dragonconsole:__subpackages__",
-    ],
-)
+package(default_visibility = ["//src/main:__subpackages__"])
 
 kt_jvm_library(
     name = "file_processor",

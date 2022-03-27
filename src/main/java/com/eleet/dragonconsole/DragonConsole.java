@@ -31,6 +31,7 @@ import java.util.*;
 import com.eleet.dragonconsole.util.*;
 import java.awt.datatransfer.DataFlavor;
 import dev.bbuck.dragonconsole.file.FileProcessor;
+import dev.bbuck.dragonconsole.text.TextColor;
 
 /**
  * DragonConsole is a console mimic designed to give Java programmers a RTF
@@ -973,9 +974,8 @@ public class DragonConsole extends JPanel implements KeyListener,
      *         removed.
      */
     public TextColor removeTextColor(char code) {
-        TextColor test = TextColor.getTestTextColor(code);
         for (int i = 0; i < textColors.size(); i++) {
-            if (textColors.get(i).equals(test)) {
+            if (textColors.get(i).getCharCode() == code) {
                 TextColor remove = textColors.remove(i);
                 DocumentStyler.removeColor(consoleStyledDocument, remove,
                         textColors);
@@ -1017,9 +1017,8 @@ public class DragonConsole extends JPanel implements KeyListener,
      *         removed.
      */
     public TextColor removeTextColor(Color color) {
-        TextColor test = TextColor.getTestTextColor(color);
         for (int i = 0; i < textColors.size(); i++) {
-            if (textColors.get(i).equals(test)) {
+            if (textColors.get(i).getColor().equals(color)) {
                 TextColor remove = textColors.remove(i);
                 DocumentStyler.removeColor(consoleStyledDocument, remove,
                         textColors);
@@ -1046,9 +1045,13 @@ public class DragonConsole extends JPanel implements KeyListener,
      *         Character Code.
      */
     private boolean containsColorCode(char code) {
-        TextColor test = TextColor.getTestTextColor(code);
+        for (TextColor color : textColors) {
+            if (color.getCharCode() == code) {
+                return true;
+            }
+        }
 
-        return textColors.contains(test);
+        return false;
     }
 
     /**
@@ -1109,11 +1112,10 @@ public class DragonConsole extends JPanel implements KeyListener,
      *
      * @param code  The Character code for the new TextColor.
      * @param color The background color for the new Character code.
-     * @throws
-     * com.eleet.dragonconsole.util.TextColor.InvalidCharCodeException
+     * @throws IllegalArgumentException if the character is not a valid TextColor
+     *                                  character.
      */
-    public void addTextColor(char code, Color color)
-            throws com.eleet.dragonconsole.util.TextColor.InvalidCharCodeException {
+    public void addTextColor(char code, Color color) {
         TextColor newColor = new TextColor(code, color);
         textColors.add(newColor);
         if (!useInlineInput)
