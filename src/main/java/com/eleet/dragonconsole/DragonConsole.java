@@ -1158,7 +1158,7 @@ public class DragonConsole extends JPanel implements KeyListener,
      *
      * @return Returns the version string for use with anything.
      */
-    public String getVersion() {
+    public static String getVersion() {
         return "v" + VERSION + "." + SUB_VER + "." + BUG_FIX + VER_TAG;
     }
 

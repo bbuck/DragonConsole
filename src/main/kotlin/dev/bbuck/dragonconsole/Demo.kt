@@ -3,7 +3,6 @@
 package dev.bbuck.dragonconsole
 
 import com.eleet.dragonconsole.DemoProcessor
-import com.eleet.dragonconsole.DragonConsoleFrame
 import javax.swing.SwingUtilities
 
 fun main() {
