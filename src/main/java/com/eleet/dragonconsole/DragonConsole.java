@@ -33,6 +33,7 @@ import java.awt.datatransfer.DataFlavor;
 import dev.bbuck.dragonconsole.file.FileProcessor;
 import dev.bbuck.dragonconsole.text.TextColor;
 import dev.bbuck.dragonconsole.text.DocumentStyler;
+import dev.bbuck.dragonconsole.text.ANSI;
 
 /**
  * DragonConsole is a console mimic designed to give Java programmers a RTF

@@ -1,12 +1,6 @@
 package(default_visibility = ["//src/main:__subpackages__"])
 
 java_library(
-    name = "ansi",
-    srcs = ["ANSI.java"],
-    deps = ["//src/main/kotlin/dev/bbuck/dragonconsole/text:text_color"],
-)
-
-java_library(
     name = "input_string",
     srcs = ["InputString.java"],
     deps = ["//src/main/kotlin/dev/bbuck/dragonconsole/log:debug"],

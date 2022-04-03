@@ -7,10 +7,10 @@ java_library(
         "DragonConsole.java",
     ],
     deps = [
-        "//src/main/java/com/eleet/dragonconsole/util:ansi",
         "//src/main/java/com/eleet/dragonconsole/util:input_controller",
         "//src/main/java/com/eleet/dragonconsole/util:prompt_panel",
         "//src/main/kotlin/dev/bbuck/dragonconsole/file:file_processor",
+        "//src/main/kotlin/dev/bbuck/dragonconsole/text:ansi",
         "//src/main/kotlin/dev/bbuck/dragonconsole/text:document_styler",
         "//src/main/kotlin/dev/bbuck/dragonconsole/text:text_color",
     ],
@@ -35,7 +35,7 @@ java_binary(
     name = "dragon_console_demo",
     main_class = "dev.bbuck.dragonconsole.Demo",
     resources = [
-        "//src/main/resources/com/eleet/dragonconsole:resources/ansi",
+        "//src/main/kotlin/dev/bbuck/dragonconsole/text:ansi",
         "//src/main/resources/com/eleet/dragonconsole:resources/colors",
         "//src/main/resources/com/eleet/dragonconsole:resources/input",
         "//src/main/resources/com/eleet/dragonconsole:resources/l_console",

@@ -12,3 +12,9 @@ kt_jvm_library(
     srcs = ["DocumentStyler.kt"],
     deps = [":text_color"],
 )
+
+kt_jvm_library(
+    name = "ansi",
+    srcs = ["Ansi.kt"],
+    deps = [":text_color"],
+)
