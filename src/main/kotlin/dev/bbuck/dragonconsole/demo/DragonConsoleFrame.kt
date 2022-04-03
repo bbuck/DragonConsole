@@ -1,4 +1,4 @@
-package dev.bbuck.dragonconsole
+package dev.bbuck.dragonconsole.demo
 
 import com.eleet.dragonconsole.DragonConsole
 import java.awt.Toolkit

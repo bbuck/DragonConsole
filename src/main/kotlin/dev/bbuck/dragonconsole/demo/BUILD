@@ -1,26 +1,39 @@
+load("@io_bazel_rules_kotlin//kotlin:jvm.bzl", "kt_jvm_library")
+
 package(default_visibility = ["//src/main:__subpackages__"])
 
-java_library(
-    name = "dragon_console",
-    srcs = [
-        "CommandProcessor.java",
-        "DragonConsole.java",
-    ],
+kt_jvm_library(
+    name = "dragon_console_frame",
+    srcs = ["DragonConsoleFrame.kt"],
     deps = [
-        "//src/main/java/com/eleet/dragonconsole/util:input_controller",
-        "//src/main/java/com/eleet/dragonconsole/util:prompt_panel",
+        "//src/main/java/com/eleet/dragonconsole:dragon_console",
+    ],
+)
+
+kt_jvm_library(
+    name = "demo_processor",
+    srcs = ["DemoProcessor.kt"],
+    deps = [
+        "//src/main/java/com/eleet/dragonconsole:dragon_console",
         "//src/main/kotlin/dev/bbuck/dragonconsole/file:file_processor",
-        "//src/main/kotlin/dev/bbuck/dragonconsole/text:ansi",
-        "//src/main/kotlin/dev/bbuck/dragonconsole/text:document_styler",
-        "//src/main/kotlin/dev/bbuck/dragonconsole/text:text_color",
+    ],
+)
+
+kt_jvm_library(
+    name = "demo",
+    srcs = ["Demo.kt"],
+    deps = [
+        ":demo_processor",
+        ":dragon_console_frame",
     ],
 )
 
 java_binary(
     name = "dragon_console_demo",
-    main_class = "dev.bbuck.dragonconsole.Demo",
+    main_class = "dev.bbuck.dragonconsole.demo.Demo",
     resources = [
         "//src/main/kotlin/dev/bbuck/dragonconsole/text:ansi",
+        "//src/main/resources/com/eleet/dragonconsole:resources/ansi",
         "//src/main/resources/com/eleet/dragonconsole:resources/colors",
         "//src/main/resources/com/eleet/dragonconsole:resources/input",
         "//src/main/resources/com/eleet/dragonconsole:resources/l_console",
@@ -29,6 +42,6 @@ java_binary(
         "//src/main/resources/com/eleet/dragonconsole:resources/logo_w",
     ],
     runtime_deps = [
-        "//src/main/kotlin/dev/bbuck/dragonconsole:demo",
+        ":demo",
     ],
 )

@@ -1,8 +1,7 @@
 @file:JvmName("Demo")
 
-package dev.bbuck.dragonconsole
+package dev.bbuck.dragonconsole.demo
 
-import com.eleet.dragonconsole.DemoProcessor
 import javax.swing.SwingUtilities
 
 fun main() {
