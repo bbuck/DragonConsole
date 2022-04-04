@@ -5,7 +5,6 @@ java_library(
     srcs = ["InputController.java"],
     deps = [
         "//src/main/kotlin/dev/bbuck/dragonconsole/text:input_string",
-        # ":input_string",
     ],
 )
 

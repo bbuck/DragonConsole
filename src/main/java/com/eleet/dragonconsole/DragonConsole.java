@@ -117,18 +117,18 @@ public class DragonConsole extends JPanel implements KeyListener,
     /**
      * Minor Update/Sub-Version number, usually comes with additional features.
      */
-    private static final String SUB_VER = "0";
+    private static final String SUB_VER = "1";
 
     /**
      * Minor Change/Bug Fix number, does not include additional features.
      */
-    private static final String BUG_FIX = "2";
+    private static final String BUG_FIX = "0";
 
     /**
      * The Version Tag is "b" for Beta or "a" for Alpha, if it's a full release
      * it's blank.
      */
-    private static final String VER_TAG = "b";
+    private static final String VER_TAG = "";
 
     // Default Finals
     /**
