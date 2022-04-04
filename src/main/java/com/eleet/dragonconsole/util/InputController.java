@@ -25,6 +25,7 @@ package com.eleet.dragonconsole.util;
 import javax.swing.JTextPane;
 import javax.swing.text.*;
 import java.awt.Toolkit;
+import dev.bbuck.dragonconsole.text.InputString;
 
 /**
  * This class is used when the DragonConsole is using the Inline Input Scheme
@@ -32,12 +33,14 @@ import java.awt.Toolkit;
  * all text is added to the DragonConsole. In addition to it's purpose as a
  * DocumentFilter this method also controls the handling of Input by storing it
  * in an InputString (if and when Input is actively being received) and then
- * determines how to display the input.<br /><br />
+ * determines how to display the input.<br />
+ * <br />
  * For example if Input is ranged this method will prevent the user from
  * entering input outside of the proper range, and if this input is infinite it
  * will prevent the user from entering anything before the beginning point of
  * the input. If input is protected it will properly store all text in the
  * InputString and display only the protected character in it's place.
+ *
  * @author Brandon E Buck
  * @version 1.4
  */
@@ -53,7 +56,7 @@ public class InputController extends DocumentFilter {
      * value
      */
     private int rangeStart;
-    
+
     /**
      * The end of the input range (if it has a range limit) or '-1' if the
      * input range is Infinite.
@@ -78,7 +81,7 @@ public class InputController extends DocumentFilter {
      * protected.
      */
     private String protectedChar = "*";
-    
+
     /**
      * Boolean flag that determines if Input is actively being take by this
      * InputController.
@@ -104,7 +107,7 @@ public class InputController extends DocumentFilter {
      * removed from the Console programmatically.
      */
     private boolean bypassRemove = false;
-    
+
     /**
      * Flag that determines if the Input is being ignored by the Console. If
      * input is being ignored by the Console then the InputController assumes
@@ -121,10 +124,10 @@ public class InputController extends DocumentFilter {
      * before the interruption.
      */
     private StoredInput stored = null;
-    
+
     /**
      * Flag that determines which input method is being used by the Console.
-     * This flag is <code>true</code> for Inline Input and 
+     * This flag is <code>true</code> for Inline Input and
      * <code>false</code> if otherwise.
      */
     private boolean consoleInputMethod = true;
@@ -132,13 +135,13 @@ public class InputController extends DocumentFilter {
     /**
      * Default constructor
      * rangeStart - The beginning of the input range, will always contain a
-     *    value
+     * value
      * rangeEnd - The end of the input range, -1 if the range has no limit
-     *    or the max value of the input range
+     * or the max value of the input range
      * protect - true or false, whether or not the input needs to be
-     *    protected
+     * protected
      * protectedText - if the input needs to be protected the actual input
-     *    will be stored here.
+     * will be stored here.
      */
     public InputController(AttributeSet attr) {
         super();
@@ -151,47 +154,51 @@ public class InputController extends DocumentFilter {
         console = null;
     }
 
-    /** 
+    /**
      * Changes the default <code>AttributeSet</code> for this
      * <code>InputController</code> that is used to style all input.
+     *
      * @param newInputAttr The new <code>AttributeSet</code> to use
      */
     public void setInputAttributeSet(AttributeSet newInputAttr) {
         inputAttr = newInputAttr;
     }
 
-    /** 
+    /**
      * This method is called once the JTextPane has been initialized in the
      * initializeConsole() method of the DragonConsole class to make sure
      * that the console variable in this InputController is the proper
      * JTextPane.
+     *
      * @param jtp The JTextPane to set as the console.
      */
     public void installConsole(JTextPane jtp) {
         console = jtp;
     }
 
-    /** 
+    /**
      * This method is used to determine if the Input is currently being
      * protected. An important note is that this method will return false if
      * input is not being protected, as well as if this InputController is not
      * currently receiving input.
+     *
      * @return <code>true</code> if Input is being protected.
      */
     public boolean isProtected() {
         return protect;
     }
 
-    /** 
+    /**
      * This method returns the BYPASS prefix that should be added to any String
      * that needs to bypass the DocumentFilter.
+     *
      * @return The BYPASS prefix used to bypass the DocumentFilter.
      */
     public String getBypassPrefix() {
         return BYPASS;
     }
 
-    /** 
+    /**
      * This method is used to reset the current state of input in this
      * InputController. This method will also set
      * <code>isReceivingInput</code>.
@@ -204,28 +211,31 @@ public class InputController extends DocumentFilter {
         isReceivingInput = false;
     }
 
-    /** 
+    /**
      * This method is used to tell the InputController the method of input
      * that is being used by the DragonConsole this InputController belongs to.
+     *
      * @param consoleInputMethod The currentInputMethod used by the
-     *  DragonConsole.
+     *                           DragonConsole.
      */
     public void setConsoleInputMethod(boolean consoleInputMethod) {
         this.consoleInputMethod = consoleInputMethod;
     }
 
-    /** 
+    /**
      * Used by the DragonConsole when it's told to IgnoreInput to relay the
      * information to this InputController so that it, too, can ignore input.
+     *
      * @param ignoreInput
      */
     public void setIgnoreInput(boolean ignoreInput) {
         this.ignoreInput = ignoreInput;
     }
 
-    /** 
+    /**
      * This method is called when Text is pasted to the Console while Inline
      * Input is being used, or when Input is restored.
+     *
      * @param newInput The new Input text to add to the Document.
      */
     public void setInput(String newInput) {
@@ -250,19 +260,20 @@ public class InputController extends DocumentFilter {
             } catch (Exception exc) {
                 javax.swing.JOptionPane.showMessageDialog(null,
                         "Error #0011\n"
-                      + "Failed to set the input in the Document!\n"
-                      + exc.getMessage(),
-                      "Error Caught", javax.swing.JOptionPane.ERROR_MESSAGE);
+                                + "Failed to set the input in the Document!\n"
+                                + exc.getMessage(),
+                        "Error Caught", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
-    /** 
+    /**
      * This method was moved out of it's previous location in
      * <code>setInputStyle</code> to make it much easier for the DragonConsole
      * to set the proper start location of this input. If the input type is
      * ranged this method will adjust the <code>rangeEnd</code> value to
      * hold the proper ending range index of this Input.
+     *
      * @param newRangeStart The new location of the beginning of this input.
      */
     public void setRangeStart(int newRangeStart) {
@@ -273,11 +284,11 @@ public class InputController extends DocumentFilter {
         }
     }
 
-    /** 
+    /**
      * Passed an input String from the console and breaks it down and sets
      * up the input controller according the input string passed to it.
      * The input strings format is:
-     *      %i#[+|-|];
+     * %i#[+|-|];
      *
      * Accepted minimum is "%i;" which means input from the position of %
      * forward.
@@ -294,12 +305,13 @@ public class InputController extends DocumentFilter {
      *
      * <strong>IMPORTANT: The Start position MUST be specified after the
      * input style is set. This was added in to give the console more
-     * control as to where the cursor needs to default for input control and
+     * control as to input the cursor needs to default for input control and
      * make input ranges MUCH more accurate.</strong>
+     *
      * @param newInputStyle String containing the new input style for the input
-     *  controller.
+     *                      controller.
      * @return Returns true if all text after the input command should be
-     *  ignored (if the input has an unlimited Range);
+     *         ignored (if the input has an unlimited Range);
      */
     public boolean setInputStyle(String newInputStyle) {
         rangeStart = -1;
@@ -316,7 +328,8 @@ public class InputController extends DocumentFilter {
             inputStyle = inputStyle.substring(0, inputStyle.length() - 1); // Chop off the ";"
 
             if (inputStyle.length() > 0) {
-                if (inputStyle.charAt(inputStyle.length() - 1) == '+' || inputStyle.charAt(inputStyle.length() - 1) == '-') {
+                if (inputStyle.charAt(inputStyle.length() - 1) == '+'
+                        || inputStyle.charAt(inputStyle.length() - 1) == '-') {
                     char tempProtect = inputStyle.charAt(inputStyle.length() - 1);
                     inputStyle = inputStyle.substring(0, inputStyle.length() - 1);
 
@@ -343,11 +356,12 @@ public class InputController extends DocumentFilter {
         }
     }
 
-    /** 
+    /**
      * The location the input range starts, used for programmatically
      * setting the outputPane's Caret position.
+     *
      * @return The start position of the input, if not currently receiving
-     * input then -1
+     *         input then -1
      */
     public int getInputRangeStart() {
         if (isReceivingInput)
@@ -356,7 +370,7 @@ public class InputController extends DocumentFilter {
             return -1;
     }
 
-    /** 
+    /**
      * This method is used in conjuction with <code>clearText()</code> from
      * the DragonConsole class and removes all text from the Document as well
      * as reset the current state of input (if any).
@@ -367,42 +381,46 @@ public class InputController extends DocumentFilter {
         StyledDocument doc = console.getStyledDocument();
         try {
             doc.remove(0, doc.getLength());
-        } catch(Exception exc) {
+        } catch (Exception exc) {
             javax.swing.JOptionPane.showMessageDialog(null,
                     "Error #0012\n"
-                  + "Failed to clear the text in Document!\n"
-                  + exc.getMessage(),
-                  "Error Caught", javax.swing.JOptionPane.ERROR_MESSAGE);
+                            + "Failed to clear the text in Document!\n"
+                            + exc.getMessage(),
+                    "Error Caught", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    /** Returns the ending location of the current input.
+    /**
+     * Returns the ending location of the current input.
      * This method returns the ending location (in the StyledDocument) of the
      * current Input. This method is "-1" if input is Infinite (or if not
      * receiving input).
+     *
      * @return The end of the Input range, or -1 if Input is Infinite.
      */
     public int getInputRangeEnd() {
         return rangeEnd;
     }
 
-    /** 
+    /**
      * Returns true if this input has no maximum range, or false if the
      * input is limited by a range.
+     *
      * @return true if input has no limited range, or false if it does.
      */
     public boolean isInfiniteInput() {
         return (rangeEnd == -1);
     }
 
-    /** 
+    /**
      * Sets input to it's basic level which is an unlimited number of
      * characters after the startPosition which is the equivalent of calling
      * <code>setInputStyle("%i;");</code>. This method is called from
      * the append method if no input script was detected in the output. (By
      * default, all output MUST have input).
+     *
      * @param startPosition The last position of output, and the start of the
-     *  input.
+     *                      input.
      */
     public void setBasicInput(int startPosition) {
         rangeStart = startPosition;
@@ -412,11 +430,12 @@ public class InputController extends DocumentFilter {
         isReceivingInput = true;
     }
 
-    /** 
+    /**
      * This method creates a String of "blank spaces" which are used as space
      * holders for ranged input. The number of blank spaces that fill this
      * String is equal to the length of the Range for this input as determined
      * by (rangeEnd - rangeStart).
+     *
      * @return A String of Spaces equal to the length of the Input range.
      */
     public String getInputRangeString() {
@@ -436,26 +455,29 @@ public class InputController extends DocumentFilter {
 
     /**
      * Sets a custom protected character if '*' is not desired.
+     *
      * @param protectedChar The new protected char.
      */
     public void setProtectedChar(char protectedChar) {
         this.protectedChar = "" + protectedChar;
     }
 
-    /** 
+    /**
      * This method is used to determine if the InputController has input
      * controls in place for current input. This is used to help prevent
      * tampering with output while
+     *
      * @return <code>true</code> if this InputController is actively
-     *  receiving and processing input.
+     *         receiving and processing input.
      */
     public boolean isReceivingInput() {
         return isReceivingInput;
     }
 
-    /** 
+    /**
      * This method will return the current text stored in the InputString that
      * has been trimmed.
+     *
      * @return The Text in the InputString that has been trimmed.
      */
     public String getInput() {
@@ -463,12 +485,13 @@ public class InputController extends DocumentFilter {
         return input.get().trim();
     }
 
-    /** 
+    /**
      * Creates a String of nothing but Protected Characters with the length that
      * is given. Used when bulk text is pasted/added to the Document if input
      * is protected.
+     *
      * @param length The number of Protected Characters to fill this String
-     *  with.
+     *               with.
      * @return The String of Protected Characters of the specified length.
      */
     private String getProtectedString(int length) {
@@ -479,10 +502,11 @@ public class InputController extends DocumentFilter {
         return pString;
     }
 
-    /** 
+    /**
      * This method is used to create a Protected String that mimics a Ranged
      * input String by replacing all characters (aside from a space) with a
      * protected character.
+     *
      * @param string The String to create a Protected String of.
      * @return The Protected String that "mimics" the given String.
      */
@@ -499,19 +523,21 @@ public class InputController extends DocumentFilter {
         return returnString;
     }
 
-    /** 
+    /**
      * If the String starts with the BYPASS prefix this method adds it to the
      * Document with the given Attribute. If not, then the program will
      * determine if input is protected or not and add the bulk input accordingly
      * as well as update the InputString with the new input.
-     * @param fb The FilterBypass Object used to bypass this DocumentFilter.
+     *
+     * @param fb     The FilterBypass Object used to bypass this DocumentFilter.
      * @param offset The location in the Document to place this String.
      * @param string The String to add to the Document at the given location.
-     * @param attr The Attribute to use only if bypassing the processing.
+     * @param attr   The Attribute to use only if bypassing the processing.
      * @throws BadLocationException
      */
     @Override
-    public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+    public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr)
+            throws BadLocationException {
         if (string.startsWith(BYPASS)) {
             string = string.substring(BYPASS.length());
             fb.insertString(offset, string, attr);
@@ -526,7 +552,7 @@ public class InputController extends DocumentFilter {
             Toolkit.getDefaultToolkit().beep();
     }
 
-    /** 
+    /**
      * This method will replace the portion of text with all the given
      * attributes if the String starts with the BYPASS prefix. If it doesn't
      * then it will determine if Input is infinite, or ranged. If Input is
@@ -535,22 +561,24 @@ public class InputController extends DocumentFilter {
      * inputAttr. If Input is Infinite then this will replace the Text as long
      * as it's after the beginning of this Input and then adds the String to
      * the InputString.
-     * @param fb The FilterBypass Object used to bypass this DocumentFilter.
+     *
+     * @param fb     The FilterBypass Object used to bypass this DocumentFilter.
      * @param offset The location in the Document to place this String.
      * @param length The length of the Range that is being replaced.
      * @param string The String to insert in place of the Replaced portion.
-     * @param attr The Attribute to use only if bypassing the processing.
+     * @param attr   The Attribute to use only if bypassing the processing.
      * @throws BadLocationException
      */
     @Override
-    public void replace(FilterBypass fb, int offset, int length, String string, AttributeSet attr) throws BadLocationException {
+    public void replace(FilterBypass fb, int offset, int length, String string, AttributeSet attr)
+            throws BadLocationException {
         if (string.startsWith(BYPASS)) {
             String newString = string.substring(BYPASS.length());
             if (protect)
                 newString = restoreProtectedString(newString);
-            
+
             fb.replace(offset, length, newString, attr);
-            
+
         } else {
             if (!ignoreInput) {
                 if (isReceivingInput && rangeStart > 0) {
@@ -571,8 +599,6 @@ public class InputController extends DocumentFilter {
                             } else
                                 Toolkit.getDefaultToolkit().beep();
 
-
-
                         } else if (isInfiniteInput()) {
                             if (protect)
                                 fb.replace(offset, length, protectedChar, inputAttr);
@@ -590,14 +616,15 @@ public class InputController extends DocumentFilter {
         }
     }
 
-    /** 
+    /**
      * Removes a given range from the Document. This method will bypass
      * processing if <code>bypassRemove</code> is set to <code>true</code>
      * but otherwise it will process according to the type of Input. If Input is
      * Ranged it will the character form the Document and replace it with a
      * space, as well as remove from the InputString. If Input is Infinite it
      * will remove it from the Document as well as the InputString.
-     * @param fb The FilterBypass Object used to bypass this DocumentFilter.
+     *
+     * @param fb     The FilterBypass Object used to bypass this DocumentFilter.
      * @param offset The location in the Document to place this String.
      * @param length The length of the Range that is being replaced.
      * @throws BadLocationException
@@ -618,7 +645,6 @@ public class InputController extends DocumentFilter {
                         } else
                             fb.remove(offset, length);
 
-
                         if (!isInfiniteInput())
                             input.rangeRemove((offset - rangeStart), length);
                         else
@@ -634,17 +660,18 @@ public class InputController extends DocumentFilter {
         }
     }
 
-    /** 
+    /**
      * This method is used to determine if there is any StoredInput or not. Used
      * to determine if Input should be restored or not.
+     *
      * @return <code>true</code> if there is StoredInput, or else it returns
-     *  false.
+     *         false.
      */
     public boolean hasStoredInput() {
         return (stored != null);
     }
 
-    /** 
+    /**
      * This method will store the information needed to later determine if it
      * can restore Input as well as actually restore input.
      */
@@ -654,16 +681,17 @@ public class InputController extends DocumentFilter {
         reset();
     }
 
-    /** 
+    /**
      * Restores the StoredInput if, and only if, the settings match the input
      * settings that are in the StoredInput.
+     *
      * @return <code>true</code> if Input was restored or not.
      */
     public boolean restoreInput() {
         if (stored != null && isReceivingInput) {
             if (stored.matches(isInfiniteInput(), protect, (rangeEnd - rangeStart))) {
                 input = stored.getInput();
-                
+
                 int end;
                 if (isInfiniteInput())
                     end = 0;
@@ -671,16 +699,18 @@ public class InputController extends DocumentFilter {
                     end = rangeEnd - rangeStart;
                 try {
                     if (consoleInputMethod)
-                        ((AbstractDocument)console.getStyledDocument()).replace(rangeStart, end, BYPASS + input.get(), inputAttr);
+                        ((AbstractDocument) console.getStyledDocument()).replace(rangeStart, end, BYPASS + input.get(),
+                                inputAttr);
                     else
-                        ((AbstractDocument)console.getStyledDocument()).replace(rangeStart, end, input.get(), inputAttr);
-                
+                        ((AbstractDocument) console.getStyledDocument()).replace(rangeStart, end, input.get(),
+                                inputAttr);
+
                 } catch (Exception exc) {
                     javax.swing.JOptionPane.showMessageDialog(null,
                             "Error #0013\n"
-                          + "Failed to restore the Input!\n"
-                          + exc.getMessage(),
-                          "Error Caught", javax.swing.JOptionPane.ERROR_MESSAGE);
+                                    + "Failed to restore the Input!\n"
+                                    + exc.getMessage(),
+                            "Error Caught", javax.swing.JOptionPane.ERROR_MESSAGE);
                 }
 
                 stored = null;
@@ -704,7 +734,7 @@ public class InputController extends DocumentFilter {
         private int range;
         private InputString input;
 
-        /** 
+        /**
          * Constructs a new StoredInput with the given State of input
          */
         public StoredInput(boolean isInfinite, boolean protect, int range, InputString input) {
@@ -714,14 +744,15 @@ public class InputController extends DocumentFilter {
             this.input = input;
         }
 
-        /** 
+        /**
          * This method determines if the given Input settings match the Input
          * settings that have been Stored in this Object.
+         *
          * @param isInfinite If the Current state of input is Infinite.
-         * @param protect If the Current input is being protected.
-         * @param range The Current range (if any) of the the input.
+         * @param protect    If the Current input is being protected.
+         * @param range      The Current range (if any) of the the input.
          * @return <code>true</code> if the Given input settings match those
-         *  Stored.
+         *         Stored.
          */
         public boolean matches(boolean isInfinite, boolean protect, int range) {
             if (this.isInfinite == isInfinite) {
@@ -741,6 +772,7 @@ public class InputController extends DocumentFilter {
 
         /**
          * Returns the InputString of this StoredInput.
+         *
          * @return The InputString of this StoredInput.
          */
         public InputString getInput() {

@@ -37,3 +37,13 @@ fun print(msg: String) {
         println(msg)
     }
 }
+
+/**
+ * Friendlier Kotlin name for `print`.
+ *
+ * @since 3.1
+ * @author Brandon Buck
+ */
+fun debugLog(msg: String) {
+    print(msg)
+}

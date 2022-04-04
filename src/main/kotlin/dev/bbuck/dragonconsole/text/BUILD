@@ -18,3 +18,11 @@ kt_jvm_library(
     srcs = ["Ansi.kt"],
     deps = [":text_color"],
 )
+
+kt_jvm_library(
+    name = "input_string",
+    srcs = ["InputString.kt"],
+    deps = [
+        "//src/main/kotlin/dev/bbuck/dragonconsole/log:debug",
+    ],
+)
