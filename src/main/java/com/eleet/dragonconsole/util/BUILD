@@ -7,9 +7,3 @@ java_library(
         "//src/main/kotlin/dev/bbuck/dragonconsole/text:input_string",
     ],
 )
-
-java_library(
-    name = "prompt_panel",
-    srcs = ["PromptPanel.java"],
-    deps = ["//src/main/kotlin/dev/bbuck/dragonconsole/text:text_color"],
-)

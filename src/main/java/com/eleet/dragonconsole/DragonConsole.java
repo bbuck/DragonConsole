@@ -34,6 +34,7 @@ import dev.bbuck.dragonconsole.file.FileProcessor;
 import dev.bbuck.dragonconsole.text.TextColor;
 import dev.bbuck.dragonconsole.text.DocumentStyler;
 import dev.bbuck.dragonconsole.text.ANSI;
+import dev.bbuck.dragonconsole.ui.PromptPanel;
 
 /**
  * DragonConsole is a console mimic designed to give Java programmers a RTF
