@@ -26,3 +26,9 @@ kt_jvm_library(
         "//src/main/kotlin/dev/bbuck/dragonconsole/log:debug",
     ],
 )
+
+kt_jvm_library(
+    name = "stored_input",
+    srcs = ["StoredInput.kt"],
+    deps = [":input_string"],
+)

@@ -25,6 +25,7 @@ kt_jvm_library(
     deps = [
         ":demo_processor",
         ":dragon_console_frame",
+        "//src/main/kotlin/dev/bbuck/dragonconsole/log:debug",
     ],
 )
 

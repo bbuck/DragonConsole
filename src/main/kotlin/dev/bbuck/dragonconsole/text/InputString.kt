@@ -12,6 +12,10 @@ public class InputString(initial: String) {
         builder.append(initial)
     }
 
+    public fun clear() {
+        builder.clear()
+    }
+
     public fun append(other: String) {
         builder.append(other)
         debugLog("\"$builder\" - append(\"$other\")")
@@ -51,7 +55,7 @@ public class InputString(initial: String) {
     }
 
     public fun replace(start: Int, length: Int, value: String) {
-        if (start == builder.length) {
+        if (start >= builder.length || start + length >= builder.length) {
             append(value)
 
             return

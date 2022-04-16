@@ -19,3 +19,12 @@ kt_jvm_library(
         "//src/main/kotlin/dev/bbuck/dragonconsole/text:text_color",
     ],
 )
+
+kt_jvm_library(
+    name = "input_controller",
+    srcs = ["InputController.kt"],
+    deps = [
+        "//src/main/kotlin/dev/bbuck/dragonconsole/text:input_string",
+        "//src/main/kotlin/dev/bbuck/dragonconsole/text:stored_input",
+    ],
+)

@@ -28,13 +28,13 @@ import java.awt.event.*;
 import javax.swing.event.*;
 import javax.swing.text.*;
 import java.util.*;
-import com.eleet.dragonconsole.util.*;
 import java.awt.datatransfer.DataFlavor;
 import dev.bbuck.dragonconsole.file.FileProcessor;
 import dev.bbuck.dragonconsole.text.TextColor;
 import dev.bbuck.dragonconsole.text.DocumentStyler;
 import dev.bbuck.dragonconsole.text.ANSI;
 import dev.bbuck.dragonconsole.ui.PromptPanel;
+import dev.bbuck.dragonconsole.ui.InputController;
 
 /**
  * DragonConsole is a console mimic designed to give Java programmers a RTF
