@@ -1,6 +1,6 @@
 package dev.bbuck.dragonconsole.demo
 
-import com.eleet.dragonconsole.DragonConsole
+import dev.bbuck.dragonconsole.DragonConsole
 import java.awt.Toolkit
 import javax.swing.JFrame
 

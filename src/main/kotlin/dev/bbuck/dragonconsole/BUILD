@@ -1,10 +1,12 @@
+load("@io_bazel_rules_kotlin//kotlin:jvm.bzl", "kt_jvm_library")
+
 package(default_visibility = ["//src/main:__subpackages__"])
 
-java_library(
+kt_jvm_library(
     name = "dragon_console",
     srcs = [
-        "CommandProcessor.java",
-        "DragonConsole.java",
+        "CommandProcessor.kt",
+        "DragonConsole.kt",
     ],
     deps = [
         "//src/main/kotlin/dev/bbuck/dragonconsole/file:file_processor",

@@ -4,7 +4,7 @@ import dev.bbuck.dragonconsole.log.debugLog
 
 // Leaving undocumented, this looks like a poor implementation of StringBuilder
 // and is obselete as of the Kotlin clean up
-@Deprecated("Obselete, will be replaced with StringBuilder")
+@Deprecated("Poor man's StringBuilder", ReplaceWith("StringBuilder"))
 public class InputString(initial: String) {
     val builder: StringBuilder = StringBuilder()
 

@@ -6,7 +6,7 @@ kt_jvm_library(
     name = "dragon_console_frame",
     srcs = ["DragonConsoleFrame.kt"],
     deps = [
-        "//src/main/java/com/eleet/dragonconsole:dragon_console",
+        "//src/main/kotlin/dev/bbuck/dragonconsole:dragon_console",
     ],
 )
 
@@ -14,7 +14,7 @@ kt_jvm_library(
     name = "demo_processor",
     srcs = ["DemoProcessor.kt"],
     deps = [
-        "//src/main/java/com/eleet/dragonconsole:dragon_console",
+        "//src/main/kotlin/dev/bbuck/dragonconsole:dragon_console",
         "//src/main/kotlin/dev/bbuck/dragonconsole/file:file_processor",
     ],
 )
@@ -25,7 +25,6 @@ kt_jvm_library(
     deps = [
         ":demo_processor",
         ":dragon_console_frame",
-        "//src/main/kotlin/dev/bbuck/dragonconsole/log:debug",
     ],
 )
 

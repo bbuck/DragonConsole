@@ -67,7 +67,8 @@ class InputController(var inputAttributeSet: AttributeSet?) : DocumentFilter() {
 
         val docLength = styledDoc.length
         bypassRemove = true
-        styledDoc.remove(inputRangeStart, docLength)
+        styledDoc.remove(inputRangeStart, docLength - inputRangeStart)
+        inputString.set(newInput)
 
         val prefix =
                 if (consoleInputMethod) {
@@ -208,9 +209,6 @@ class InputController(var inputAttributeSet: AttributeSet?) : DocumentFilter() {
             stringValue: String,
             attributeSet: AttributeSet
     ) {
-        println(
-                "InputController::replace(FilterBypass, $offset, $length, \"$stringValue\", AttributeSet)"
-        )
         if (stringValue.startsWith(BYPASS)) {
             val withoutBypass = stringValue.substring(BYPASS.length)
             val replaceString =
@@ -228,7 +226,6 @@ class InputController(var inputAttributeSet: AttributeSet?) : DocumentFilter() {
             return
         }
 
-        println("inputRangeStart = $inputRangeStart")
         if (!isReceivingInput || inputRangeStart <= 0 || offset < inputRangeStart) {
             Toolkit.getDefaultToolkit().beep()
 
@@ -292,7 +289,10 @@ class InputController(var inputAttributeSet: AttributeSet?) : DocumentFilter() {
 
         if (isInfiniteInput()) {
             filterBypass.remove(offset, length)
-            inputString.remove((offset - inputRangeStart), length)
+            val start = offset - inputRangeStart
+            if (start < inputString.length()) {
+                inputString.remove(start, length)
+            }
 
             return
         }

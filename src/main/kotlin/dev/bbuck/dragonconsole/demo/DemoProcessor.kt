@@ -1,7 +1,7 @@
 package dev.bbuck.dragonconsole.demo
 
-import com.eleet.dragonconsole.CommandProcessor
-import com.eleet.dragonconsole.DragonConsole
+import dev.bbuck.dragonconsole.CommandProcessor
+import dev.bbuck.dragonconsole.DragonConsole
 import dev.bbuck.dragonconsole.file.readDCResource
 import kotlin.system.exitProcess
 
@@ -89,11 +89,11 @@ public class DemoProcessor : CommandProcessor() {
                 if (cmdParts.size > 1) {
                     when (cmdParts[1]) {
                         "on" -> {
-                            console.setUseANSIColorCodes(true)
+                            console?.useANSIColorCodes = true
                             outputSystem("\n\nANSI Color Codes are now on.")
                         }
                         "off" -> {
-                            console.setUseANSIColorCodes(false)
+                            console?.useANSIColorCodes = false
                             outputSystem("\n\nANSI Color Codes are now off.")
                         }
                         else ->
@@ -177,11 +177,11 @@ public class DemoProcessor : CommandProcessor() {
         }
     }
 
-    public override fun output(text: String) {
-        if (console.isUseANSIColorCodes()) {
-            super.output(convertToANSIColors(text))
+    public override fun output(message: String) {
+        if (console?.useANSIColorCodes ?: false) {
+            super.output(convertToANSIColors(message))
         } else {
-            super.output(text)
+            super.output(message)
         }
     }
 }

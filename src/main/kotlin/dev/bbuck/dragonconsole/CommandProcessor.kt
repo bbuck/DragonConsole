@@ -3,7 +3,7 @@ package dev.bbuck.dragonconsole
 import dev.bbuck.dragonconsole.file.readText
 import java.io.File
 
-public class CommandProcessor {
+public open class CommandProcessor {
     protected var console: DragonConsole? = null
         private set
 
@@ -15,7 +15,7 @@ public class CommandProcessor {
         console = null
     }
 
-    public fun processCommand(input: String) = output(input + "\n")
+    public open fun processCommand(input: String) = output(input + "\n")
 
     @Deprecated("Use the output(message) method instead")
     public fun outputToConsole(message: String) = output(message)
@@ -28,7 +28,7 @@ public class CommandProcessor {
         console?.appendErrorMessage(message)
     }
 
-    public fun output(message: String) {
+    public open fun output(message: String) {
         console?.append(message)
     }
 
