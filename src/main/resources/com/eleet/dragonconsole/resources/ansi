@@ -5,7 +5,7 @@ has two methods that will allow you to convert between &X-Dragon&x-Console&00 Co
 (DCCC) and ANSI Color Codes if you so choose.
 
 &G-FYI:&00 To make an ANSI Color Code you begin with the ESCAPE character ANSI looks
-for which is "&C-\033&00" or you could use &R-com.eleet.dragonconsole.util.ANSI.&l-ESCAPE&00.
+for which is "&C-\033&00" or you could use &R-dev.bbuck.dragonconsole.text.ANSI.&l-ESCAPE&00.
 
 &G-convertToANSIColors(&l-String&G-)&00 - Converts any DCCCs in the given String to their
 valid ANSI counterpart, if no valid counterpart for that color can be found then
